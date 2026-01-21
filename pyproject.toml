@@ -37,6 +37,9 @@ required-environments = [
     "sys_platform == 'darwin' and platform_machine == 'x86_64'",
 ]
 
+[tool.uv.pip]
+python-platform = "x86_64-apple-darwin"
+
 [tool.ruff]
 line-length = 88
 target-version = "py39"
