@@ -56,6 +56,12 @@ cd agent-starter-python
 uv sync
 ```
 
+If you are on Intel macOS 11 or 12 and see an `onnxruntime` wheel error, run:
+
+```console
+MACOSX_DEPLOYMENT_TARGET=11.0 uv sync --python-platform x86_64-apple-darwin
+```
+
 Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environment by copying `.env.example` to `.env.local` and filling in the required keys:
 
 - `LIVEKIT_URL`
@@ -75,6 +81,20 @@ Before your first run, you must download certain models such as [Silero VAD](htt
 
 ```console
 uv run python src/agent.py download-files
+```
+
+If you used `--python-platform` during sync, run the agent commands with `--no-sync`:
+
+```console
+uv run --no-sync python src/agent.py download-files
+```
+
+For example:
+
+```console
+uv run --no-sync python src/agent.py console
+uv run --no-sync python src/agent.py dev
+uv run --no-sync python src/agent.py start
 ```
 
 Next, run this command to speak to your agent directly in your terminal:
