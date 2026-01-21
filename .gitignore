@@ -1,12 +1,254 @@
+# Comprehensive .gitignore for LiveKit Agents Python Project
+
+# ==============================================================================
+# Python-specific patterns
+# ==============================================================================
+
+# Bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.ENV/
+
+# Python-specific IDEs
+.ropeproject/
+.mypy_cache/
+.dmypy.json
+.dmypy.json.bak
+.pyre/
+.pytype/
+
+# ==============================================================================
+# Environment and secrets
+# ==============================================================================
+
+# Environment files (keep .env.example)
 .env
 .env.*
 !.env.example
-.DS_Store
-__pycache__
-.idea
-KMS
-.venv
-.vscode
-*.egg-info
+.env.local
+.env.*.local
+
+# Secrets and keys
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+*.secret
+*.credentials
+
+# ==============================================================================
+# IDE and editor files
+# ==============================================================================
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+
+# ==============================================================================
+# Testing artifacts
+# ==============================================================================
+
+# Pytest
+.pytest_cache/
 .pytest_cache
+.tox/
+.hypothesis/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Test outputs
+test-results/
+test-reports/
+*.test.log
+
+# ==============================================================================
+# Build and distribution
+# ==============================================================================
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.dll
+
+# ==============================================================================
+# Linting and formatting
+# ==============================================================================
+
+# Ruff cache
+.ruff_cache/
 .ruff_cache
+
+# Other linter caches
+.mypy_cache/
+.pytype/
+.pyre/
+
+# ==============================================================================
+# OS-specific files
+# ==============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==============================================================================
+# Project-specific (LiveKit Agents)
+# ==============================================================================
+
+# Downloaded model files (if stored locally)
+models/
+*.onnx
+*.pt
+*.pth
+*.h5
+*.pb
+*.tflite
+
+# Log files
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# LiveKit-specific artifacts
+# Note: uv.lock and livekit.toml should be tracked for your own project (not ignored)
+# They are currently not ignored to allow tracking when you start your own project
+
+# ==============================================================================
+# Docker artifacts
+# ==============================================================================
+
+# Docker volumes and data
+docker-data/
+.docker/
+
+# ==============================================================================
+# Documentation builds
+# ==============================================================================
+
+# Sphinx builds
+docs/_build/
+docs/.doctrees/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==============================================================================
+# Miscellaneous
+# ==============================================================================
+
+# Project-specific
+KMS
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache directories
+.cache/
+*.cache

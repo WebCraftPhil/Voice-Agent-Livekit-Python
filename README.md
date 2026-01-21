@@ -59,7 +59,7 @@ uv sync
 If you are on Intel macOS 11 or 12 and see an `onnxruntime` wheel error, run:
 
 ```console
-MACOSX_DEPLOYMENT_TARGET=11.0 uv sync --python-platform x86_64-apple-darwin
+uv sync --python-platform x86_64-apple-darwin
 ```
 
 Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environment by copying `.env.example` to `.env.local` and filling in the required keys:
