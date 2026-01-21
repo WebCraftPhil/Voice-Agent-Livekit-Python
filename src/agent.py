@@ -8,7 +8,9 @@ from livekit.agents import (
     AgentSession,
     JobContext,
     JobProcess,
+    RunContext,
     cli,
+    function_tool,
     inference,
     room_io,
 )
@@ -23,28 +25,86 @@ load_dotenv(".env.local")
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(
-            instructions="""You are a helpful voice AI assistant. The user is interacting with you via voice, even if you perceive the conversation as text.
-            You eagerly assist users with their questions by providing information from your extensive knowledge.
-            Your responses are concise, to the point, and without any complex formatting or punctuation including emojis, asterisks, or other symbols.
-            You are curious, friendly, and have a sense of humor.""",
+            instructions="""You are a friendly and professional voice AI assistant serving the Manchester, New Hampshire area. You are speaking with local subscribers over the telephone.
+
+            Your role is to:
+            - Greet callers warmly and professionally
+            - Provide information about local services and businesses in the Manchester, NH area
+            - Answer questions about the area, including neighborhoods, attractions, and local amenities
+            - Be knowledgeable about Manchester's history, culture, and community
+
+            Communication style:
+            - Keep responses concise and clear for telephone conversation
+            - Speak naturally without complex formatting, emojis, asterisks, or other symbols
+            - Be friendly, helpful, and patient
+            - If you don't know something specific, be honest and offer to help with related questions
+
+            Key information about Manchester, NH:
+            - Largest city in New Hampshire
+            - Located in Hillsborough County along the Merrimack River
+            - Known for the historic Amoskeag Millyard
+            - Home to the Manchester-Boston Regional Airport
+            - Features attractions like the Currier Museum of Art and SNHU Arena
+            - Vibrant downtown with local restaurants, shops, and entertainment""",
         )
 
-    # To add tools, use the @function_tool decorator.
-    # Here's an example that adds a simple weather tool.
-    # You also have to add `from livekit.agents import function_tool, RunContext` to the top of this file
-    # @function_tool
-    # async def lookup_weather(self, context: RunContext, location: str):
-    #     """Use this tool to look up current weather information in the given location.
-    #
-    #     If the location is not supported by the weather service, the tool will indicate this. You must tell the user the location's weather is unavailable.
-    #
-    #     Args:
-    #         location: The location to look up weather information for (e.g. city name)
-    #     """
-    #
-    #     logger.info(f"Looking up weather for {location}")
-    #
-    #     return "sunny with a temperature of 70 degrees."
+    @function_tool
+    async def get_local_info(self, context: RunContext, topic: str):
+        """Use this tool to get information about local Manchester, NH services, attractions, or businesses.
+
+        Args:
+            topic: The topic or type of information requested (e.g., restaurants, parks, schools, healthcare, shopping)
+        """
+
+        logger.info(f"Looking up local information for: {topic}")
+
+        # Provide helpful local information based on the topic
+        topic_lower = topic.lower()
+
+        if (
+            "restaurant" in topic_lower
+            or "food" in topic_lower
+            or "dining" in topic_lower
+        ):
+            return """Manchester has a diverse dining scene. Popular areas include downtown Elm Street with restaurants like The Copper Door and Hanover Street Chop House. The Millyard district also features great options. For casual dining, Red Arrow Diner is a local favorite open 24/7."""
+
+        elif (
+            "park" in topic_lower
+            or "outdoor" in topic_lower
+            or "recreation" in topic_lower
+        ):
+            return """Manchester offers several parks including Livingston Park with its scenic trails, Derryfield Park for sports and picnicking, and Lake Massabesic for water activities. The Amoskeag Fishways has walking paths along the Merrimack River."""
+
+        elif "school" in topic_lower or "education" in topic_lower:
+            return """Manchester has a public school system with several elementary, middle, and high schools. The city is also home to Southern New Hampshire University (SNHU), Saint Anselm College, and Manchester Community College."""
+
+        elif (
+            "healthcare" in topic_lower
+            or "hospital" in topic_lower
+            or "medical" in topic_lower
+        ):
+            return """Catholic Medical Center and Elliot Hospital are the two main hospitals serving Manchester. Both offer comprehensive medical services and emergency care. There are also numerous urgent care facilities and medical practices throughout the city."""
+
+        elif (
+            "shopping" in topic_lower or "mall" in topic_lower or "store" in topic_lower
+        ):
+            return """The Mall of New Hampshire is a major shopping destination. Downtown Manchester on Elm Street has unique local shops and boutiques. The area also has various plazas and retail centers including the South Willow Street commercial district."""
+
+        elif "airport" in topic_lower or "travel" in topic_lower:
+            return """Manchester-Boston Regional Airport (MHT) is conveniently located just minutes from downtown. It serves several major airlines with direct flights to many U.S. destinations."""
+
+        elif (
+            "entertainment" in topic_lower
+            or "event" in topic_lower
+            or "arena" in topic_lower
+        ):
+            return """The SNHU Arena hosts concerts, sporting events, and shows. The historic Palace Theatre downtown presents plays, concerts, and performances. The Currier Museum of Art features impressive collections and exhibitions."""
+
+        elif "history" in topic_lower or "museum" in topic_lower:
+            return """Manchester's history is rooted in textile manufacturing at the Amoskeag Mills, once the largest cotton textile plant in the world. The Millyard Museum chronicles this history. The city has beautifully preserved historic architecture throughout downtown."""
+
+        else:
+            return f"""I can help with information about Manchester, NH. For specific details about {topic}, I recommend checking with local resources or asking about particular categories like restaurants, parks, schools, healthcare, shopping, or entertainment."""
 
 
 server = AgentServer()
