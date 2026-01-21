@@ -61,46 +61,28 @@ class Assistant(Agent):
         # Provide helpful local information based on the topic
         topic_lower = topic.lower()
 
-        if (
-            "restaurant" in topic_lower
-            or "food" in topic_lower
-            or "dining" in topic_lower
-        ):
+        if any(word in topic_lower for word in ["restaurant", "food", "dining"]):
             return """Manchester has a diverse dining scene. Popular areas include downtown Elm Street with restaurants like The Copper Door and Hanover Street Chop House. The Millyard district also features great options. For casual dining, Red Arrow Diner is a local favorite open 24/7."""
 
-        elif (
-            "park" in topic_lower
-            or "outdoor" in topic_lower
-            or "recreation" in topic_lower
-        ):
+        elif any(word in topic_lower for word in ["park", "outdoor", "recreation"]):
             return """Manchester offers several parks including Livingston Park with its scenic trails, Derryfield Park for sports and picnicking, and Lake Massabesic for water activities. The Amoskeag Fishways has walking paths along the Merrimack River."""
 
-        elif "school" in topic_lower or "education" in topic_lower:
+        elif any(word in topic_lower for word in ["school", "education"]):
             return """Manchester has a public school system with several elementary, middle, and high schools. The city is also home to Southern New Hampshire University (SNHU), Saint Anselm College, and Manchester Community College."""
 
-        elif (
-            "healthcare" in topic_lower
-            or "hospital" in topic_lower
-            or "medical" in topic_lower
-        ):
+        elif any(word in topic_lower for word in ["healthcare", "hospital", "medical"]):
             return """Catholic Medical Center and Elliot Hospital are the two main hospitals serving Manchester. Both offer comprehensive medical services and emergency care. There are also numerous urgent care facilities and medical practices throughout the city."""
 
-        elif (
-            "shopping" in topic_lower or "mall" in topic_lower or "store" in topic_lower
-        ):
+        elif any(word in topic_lower for word in ["shopping", "mall", "store"]):
             return """The Mall of New Hampshire is a major shopping destination. Downtown Manchester on Elm Street has unique local shops and boutiques. The area also has various plazas and retail centers including the South Willow Street commercial district."""
 
-        elif "airport" in topic_lower or "travel" in topic_lower:
+        elif any(word in topic_lower for word in ["airport", "travel"]):
             return """Manchester-Boston Regional Airport (MHT) is conveniently located just minutes from downtown. It serves several major airlines with direct flights to many U.S. destinations."""
 
-        elif (
-            "entertainment" in topic_lower
-            or "event" in topic_lower
-            or "arena" in topic_lower
-        ):
+        elif any(word in topic_lower for word in ["entertainment", "event", "arena"]):
             return """The SNHU Arena hosts concerts, sporting events, and shows. The historic Palace Theatre downtown presents plays, concerts, and performances. The Currier Museum of Art features impressive collections and exhibitions."""
 
-        elif "history" in topic_lower or "museum" in topic_lower:
+        elif any(word in topic_lower for word in ["history", "museum"]):
             return """Manchester's history is rooted in textile manufacturing at the Amoskeag Mills, once the largest cotton textile plant in the world. The Millyard Museum chronicles this history. The city has beautifully preserved historic architecture throughout downtown."""
 
         else:
