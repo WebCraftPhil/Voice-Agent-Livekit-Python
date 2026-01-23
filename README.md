@@ -9,6 +9,7 @@ A complete starter project for building voice AI apps with [LiveKit Agents for P
 The starter project includes:
 
 - A simple voice AI assistant, ready for extension and customization
+- Default behavior: a concise, friendly voice assistant that avoids complex formatting and punctuation
 - A voice AI pipeline with [models](https://docs.livekit.io/agents/models) from OpenAI, Cartesia, and AssemblyAI served through LiveKit Cloud
   - Easily integrate your preferred [LLM](https://docs.livekit.io/agents/models/llm/), [STT](https://docs.livekit.io/agents/models/stt/), and [TTS](https://docs.livekit.io/agents/models/tts/) instead, or swap to a realtime model like the [OpenAI Realtime API](https://docs.livekit.io/agents/models/realtime/openai)
 - Eval suite based on the LiveKit Agents [testing & evaluation framework](https://docs.livekit.io/agents/build/testing/)
@@ -45,14 +46,19 @@ For Gemini CLI, use this command to install the server:
 gemini mcp add --transport http livekit-docs https://docs.livekit.io/mcp
 ```
 
-The project includes a complete [AGENTS.md](AGENTS.md) file for these assistants. You can modify this file  your needs. To learn more about this file, see [https://agents.md](https://agents.md).
+The project includes a complete [AGENTS.md](AGENTS.md) file for these assistants. You can modify this file to your needs. To learn more about this file, see [https://agents.md](https://agents.md).
+
+## Prerequisites
+
+- Python `>=3.10, <3.14`
+- The `uv` package manager
 
 ## Dev Setup
 
 Clone the repository and install dependencies to a virtual environment:
 
 ```console
-cd agent-starter-python
+cd <your-project-directory>
 uv sync
 ```
 
@@ -68,6 +74,11 @@ Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environme
 - `LIVEKIT_API_KEY`
 - `LIVEKIT_API_SECRET`
 
+Model access options:
+
+- **LiveKit Cloud inference (default)**: models are served through LiveKit Cloud, no extra API keys required.
+- **Direct provider keys**: if you swap to provider plugins, add the required API keys (e.g., `OPENAI_API_KEY`, `ASSEMBLYAI_API_KEY`, `CARTESIA_API_KEY`) to `.env.local`.
+
 You can load the LiveKit environment automatically using the [LiveKit CLI](https://docs.livekit.io/home/cli/cli-setup):
 
 ```bash
@@ -77,7 +88,7 @@ lk app env -w -d .env.local
 
 ## Run the agent
 
-Before your first run, you must download certain models such as [Silero VAD](https://docs.livekit.io/agents/build/turns/vad/) and the [LiveKit turn detector](https://docs.livekit.io/agents/build/turns/turn-detector/):
+Before your first run, you must download certain models such as [Silero VAD](https://docs.livekit.io/agents/build/turns/vad/) and the [LiveKit turn detector](https://docs.livekit.io/agents/build/turns/turn-detector/). If you skip this step, the agent will fail to start when it tries to load these assets:
 
 ```console
 uv run python src/agent.py download-files
@@ -156,6 +167,11 @@ This project is production-ready and includes a working `Dockerfile`. To deploy 
 ## Self-hosted LiveKit
 
 You can also self-host LiveKit instead of using LiveKit Cloud. See the [self-hosting](https://docs.livekit.io/home/self-hosting/) guide for more information. If you choose to self-host, you'll need to also use [model plugins](https://docs.livekit.io/agents/models/#plugins) instead of LiveKit Inference and will need to remove the [LiveKit Cloud noise cancellation](https://docs.livekit.io/home/cloud/noise-cancellation/) plugin.
+
+## Troubleshooting
+
+- Missing env vars: ensure `.env.local` includes `LIVEKIT_URL`, `LIVEKIT_API_KEY`, and `LIVEKIT_API_SECRET`, or load them via `lk app env -w -d .env.local`.
+- Model download failures: re-run `uv run python src/agent.py download-files` and verify your network access to the model artifacts.
 
 ## License
 
