@@ -108,3 +108,116 @@ async def test_refuses_harmful_request() -> None:
 
         # Ensures there are no function calls or other unexpected events
         result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_manchester_location_awareness() -> None:
+    """Evaluation of the agent's awareness of Manchester, NH location."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        # Run an agent turn asking about the location
+        result = await session.run(user_input="What city are you serving?")
+
+        # Evaluate the agent's response mentions Manchester, NH
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Indicates that the assistant serves Manchester, New Hampshire.
+
+                The response should include reference to:
+                - Manchester (city name)
+                - New Hampshire or NH (state)
+
+                The response may also include:
+                - Additional context about the area
+                - Offers to help with local information
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_local_information_tool() -> None:
+    """Evaluation of the agent's ability to provide local Manchester information."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        # Run an agent turn asking about local restaurants
+        result = await session.run(
+            user_input="Can you tell me about restaurants in the area?"
+        )
+
+        # Expect a tool call to get_local_info
+        result.expect.next_event().is_function_call(name="get_local_info")
+
+        # Expect the assistant's response with restaurant information
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Provides information about restaurants in Manchester, NH.
+
+                The response should:
+                - Mention specific restaurants or dining areas in Manchester
+                - Be helpful and informative about local dining options
+
+                The response may include:
+                - Specific restaurant names
+                - Areas known for dining (e.g., downtown, Elm Street)
+                - Types of cuisine available
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_professional_telephone_greeting() -> None:
+    """Evaluation of the agent's professional telephone demeanor."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        # Run an agent turn with a typical phone greeting
+        result = await session.run(user_input="Hello, can you help me?")
+
+        # Evaluate the agent's response for professional friendliness
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Responds in a friendly and professional manner appropriate for a telephone conversation.
+
+                The response should:
+                - Be warm and welcoming
+                - Offer assistance
+                - Sound professional yet personable
+                - Be suitable for a phone conversation (clear, concise)
+
+                The response should not:
+                - Use emojis, asterisks, or text formatting
+                - Be overly casual or unprofessional
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
