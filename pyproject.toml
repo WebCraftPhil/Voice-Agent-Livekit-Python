@@ -35,10 +35,10 @@ asyncio_default_fixture_loop_scope = "function"
 
 [tool.uv]
 environments = [
-    "sys_platform == 'darwin' and platform_machine == 'x86_64' and platform_version >= '13.0'",
+    "sys_platform == 'darwin' and platform_machine == 'x86_64' and platform_version >= '11.0'",
 ]
 required-environments = [
-    "sys_platform == 'darwin' and platform_machine == 'x86_64' and platform_version >= '13.0'",
+    "sys_platform == 'darwin' and platform_machine == 'x86_64' and platform_version >= '11.0'",
 ]
 python-preference = "only-managed"
 

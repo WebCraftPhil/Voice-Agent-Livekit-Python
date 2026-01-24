@@ -5,12 +5,15 @@ resolution-markers = [
     "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
     "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
     "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+    "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
 ]
 supported-markers = [
-    "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'",
 ]
 required-markers = [
-    "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'",
 ]
 
 [[package]]
@@ -18,17 +21,18 @@ name = "agent-starter-python"
 version = "1.0.0"
 source = { editable = "." }
 dependencies = [
-    { name = "livekit-agents", extra = ["silero", "turn-detector"], marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-plugins-noise-cancellation", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "onnxruntime", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "python-dotenv", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "livekit-agents", extra = ["silero", "turn-detector"], marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-plugins-noise-cancellation", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.19.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.23.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "python-dotenv", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 
 [package.dev-dependencies]
 dev = [
-    { name = "pytest", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pytest-asyncio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "ruff", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "pytest", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pytest-asyncio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "ruff", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 
 [package.metadata]
@@ -70,14 +74,14 @@ name = "aiohttp"
 version = "3.13.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "aiohappyeyeballs", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "aiosignal", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "async-timeout", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "attrs", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "frozenlist", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "multidict", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "propcache", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "yarl", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "aiohappyeyeballs", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "aiosignal", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "async-timeout", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "attrs", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "frozenlist", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "multidict", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "propcache", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "yarl", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/42/32cf8e7704ceb4481406eb87161349abb46a57fee3f008ba9cb610968646/aiohttp-3.13.3.tar.gz", hash = "sha256:a949eee43d3782f2daae4f4a2819b2cb9b0c5d3b7f7a927067cc84dafdbb9f88", size = 7844556, upload-time = "2026-01-03T17:33:05.204Z" }
 wheels = [
@@ -96,8 +100,8 @@ name = "aiosignal"
 version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "frozenlist", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "frozenlist", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/61/62/06741b579156360248d1ec624842ad0edf697050bbaf7c3e46394e106ad1/aiosignal-1.4.0.tar.gz", hash = "sha256:f47eecd9468083c2029cc99945502cb7708b082c232f9aca65da147157b251c7", size = 25007, upload-time = "2025-07-03T22:54:43.528Z" }
 wheels = [
@@ -118,9 +122,9 @@ name = "anyio"
 version = "4.12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "exceptiongroup", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "exceptiongroup", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/96/f0/5eb65b2bb0d09ac6776f2eb54adee6abe8228ea05b20a5ad0e4945de8aac/anyio-4.12.1.tar.gz", hash = "sha256:41cfcc3a4c85d3f05c932da7c26d0201ac36f72abd4435ba90d0464a3ffed703", size = 228685, upload-time = "2026-01-06T11:45:21.246Z" }
 wheels = [
@@ -181,7 +185,7 @@ name = "cffi"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz", hash = "sha256:44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529", size = 523588, upload-time = "2025-09-08T23:24:04.541Z" }
 wheels = [
@@ -227,7 +231,7 @@ name = "coloredlogs"
 version = "15.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "humanfriendly", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "humanfriendly", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/cc/c7/eed8f27100517e8c0e6b923d5f0845d0cb99763da6fdee00478f91db7325/coloredlogs-15.0.1.tar.gz", hash = "sha256:7c991aa71a4577af2f82600d8f8f3a89f936baeaf9b50a9c197da014e5bf16b0", size = 278520, upload-time = "2021-06-11T10:22:45.202Z" }
 wheels = [
@@ -266,7 +270,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -323,7 +327,7 @@ name = "googleapis-common-protos"
 version = "1.72.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e5/7b/adfd75544c415c487b33061fe7ae526165241c1ea133f9a9125a56b39fd8/googleapis_common_protos-1.72.0.tar.gz", hash = "sha256:e55a601c1b32b52d7a3e65f43563e2aa61bcd737998ee672ac9b951cd49319f5", size = 147433, upload-time = "2025-11-06T18:29:24.087Z" }
 wheels = [
@@ -335,7 +339,7 @@ name = "grpcio"
 version = "1.76.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b6/e0/318c1ce3ae5a17894d5791e87aea147587c9e702f24122cc7a5c8bbaeeb1/grpcio-1.76.0.tar.gz", hash = "sha256:7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73", size = 12785182, upload-time = "2025-10-21T16:23:12.106Z" }
 wheels = [
@@ -369,8 +373,8 @@ name = "httpcore"
 version = "1.0.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "h11", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "h11", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8", size = 85484, upload-time = "2025-04-24T22:06:22.219Z" }
 wheels = [
@@ -382,10 +386,10 @@ name = "httpx"
 version = "0.28.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "httpcore", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "httpcore", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406, upload-time = "2024-12-06T15:37:23.222Z" }
 wheels = [
@@ -397,14 +401,14 @@ name = "huggingface-hub"
 version = "0.36.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "fsspec", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "hf-xet", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pyyaml", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "filelock", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "fsspec", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "hf-xet", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pyyaml", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/98/63/4910c5fa9128fdadf6a9c5ac138e8b1b6cee4ca44bf7915bbfbce4e355ee/huggingface_hub-0.36.0.tar.gz", hash = "sha256:47b3f0e2539c39bf5cde015d63b72ec49baff67b6931c3d97f3f84532e2b8d25", size = 463358, upload-time = "2025-10-23T12:12:01.413Z" }
 wheels = [
@@ -434,7 +438,7 @@ name = "importlib-metadata"
 version = "8.7.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "zipp", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "zipp", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f3/49/3b30cad09e7771a4982d9975a8cbf64f00d4a1ececb53297f1d9a7be1b10/importlib_metadata-8.7.1.tar.gz", hash = "sha256:49fef1ae6440c182052f407c8d34a68f72efc36db9ca90dc0113398f2fdde8bb", size = 57107, upload-time = "2025-12-21T10:00:19.278Z" }
 wheels = [
@@ -455,7 +459,7 @@ name = "jinja2"
 version = "3.1.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markupsafe", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "markupsafe", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz", hash = "sha256:0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d", size = 245115, upload-time = "2025-03-05T20:05:02.478Z" }
 wheels = [
@@ -481,11 +485,11 @@ name = "livekit"
 version = "1.0.23"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "aiofiles", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "aiofiles", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3e/c1/f830461f707f11294e5e4c0209dfdb5ece28d04c9a4131c87dd134589d40/livekit-1.0.23.tar.gz", hash = "sha256:890bf0b4062b1b6ea7213bef5c39a04c18cfa5021ca7171ce979219caf568f57", size = 321690, upload-time = "2025-12-18T20:04:03.475Z" }
 wheels = [
@@ -497,35 +501,35 @@ name = "livekit-agents"
 version = "1.3.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "aiofiles", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "aiohttp", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "av", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "click", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "colorama", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "docstring-parser", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "eval-type-backport", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-blingfire", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-protocol", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "nest-asyncio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "openai", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-exporter-otlp", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "prometheus-client", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "psutil", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pydantic", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pyjwt", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "sounddevice", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typer", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "watchfiles", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "aiofiles", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "aiohttp", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "av", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "click", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "colorama", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "docstring-parser", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "eval-type-backport", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-blingfire", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-protocol", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "nest-asyncio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "openai", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-exporter-otlp", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "prometheus-client", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "psutil", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pydantic", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pyjwt", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "sounddevice", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typer", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "watchfiles", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3b/8c/7ca08441e02c9a5d57acfbb4581378f991b1fec135d96bb1d0a805d42649/livekit_agents-1.3.11.tar.gz", hash = "sha256:795b043ca3839c71ae2a3daa025306a660d6cf1dccc3ea0d5b6e2a9c7a4315da", size = 2382524, upload-time = "2026-01-14T18:44:52.228Z" }
 wheels = [
@@ -534,10 +538,10 @@ wheels = [
 
 [package.optional-dependencies]
 silero = [
-    { name = "livekit-plugins-silero", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "livekit-plugins-silero", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 turn-detector = [
-    { name = "livekit-plugins-turn-detector", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "livekit-plugins-turn-detector", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 
 [[package]]
@@ -545,11 +549,11 @@ name = "livekit-api"
 version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "aiohttp", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-protocol", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pyjwt", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "aiohttp", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-protocol", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pyjwt", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b5/0a/ad3cce124e608c056d6390244ec4dd18c8a4b5f055693a95831da2119af7/livekit_api-1.1.0.tar.gz", hash = "sha256:f94c000534d3a9b506e6aed2f35eb88db1b23bdea33bb322f0144c4e9f73934e", size = 16649, upload-time = "2025-12-02T19:37:11.452Z" }
 wheels = [
@@ -572,7 +576,7 @@ name = "livekit-plugins-noise-cancellation"
 version = "0.2.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "livekit", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "livekit", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/36/2a/2782bc35b0fee188d362a4628f1c0595a61fe76d56c527bc5de4df8fddfc/livekit_plugins_noise_cancellation-0.2.5-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:b327424a70a4d4f2ce9a52144fa62f68372b644951a738b12c104cb4f2a15b6b", size = 66066815, upload-time = "2025-06-30T14:49:39.833Z" },
@@ -583,10 +587,11 @@ name = "livekit-plugins-silero"
 version = "1.3.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "livekit-agents", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "onnxruntime", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "livekit-agents", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.19.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.23.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/cf/23/45b78b9f9f0578eea571de74d1f30885a6c9055478e75180f1c7f2d62351/livekit_plugins_silero-1.3.11.tar.gz", hash = "sha256:768418e0bc4bf0db0fa2a7d36e900397761452bdaa78b3f522d2690080269a23", size = 1955597, upload-time = "2026-01-14T18:45:55.196Z" }
 wheels = [
@@ -598,12 +603,13 @@ name = "livekit-plugins-turn-detector"
 version = "1.3.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "jinja2", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "livekit-agents", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "onnxruntime", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "transformers", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "jinja2", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "livekit-agents", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.19.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "onnxruntime", version = "1.23.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "transformers", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f0/6a/4029b3aadad86bffefceba43f46ba8eb0267aee65dbf5518a928a4928d9d/livekit_plugins_turn_detector-1.3.11.tar.gz", hash = "sha256:fc1c07d4e209e7e980f31a8441d3452cf330268fdff1a840843ce7d538f79f0e", size = 8666, upload-time = "2026-01-14T18:46:08.351Z" }
 wheels = [
@@ -615,8 +621,8 @@ name = "livekit-protocol"
 version = "1.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "types-protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/df/6c/f5f7cb226441b3a357c2ea5444899b133dd13a5875894c6a9cd52fc5aa74/livekit_protocol-1.1.2.tar.gz", hash = "sha256:4550bf78fb9d365f19ea9875e565d86a2fb798854c8bd2e9100d7f7640dd9072", size = 79620, upload-time = "2026-01-20T01:27:23.437Z" }
 wheels = [
@@ -628,7 +634,7 @@ name = "markdown-it-py"
 version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mdurl", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "mdurl", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz", hash = "sha256:cb0a2b4aa34f932c007117b194e945bd74e0ec24133ceb5bac59009cda1cb9f3", size = 73070, upload-time = "2025-08-11T12:57:52.854Z" }
 wheels = [
@@ -671,7 +677,7 @@ name = "multidict"
 version = "6.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/80/1e/5492c365f222f907de1039b91f922b93fa4f764c713ee858d235495d8f50/multidict-6.7.0.tar.gz", hash = "sha256:c6e99d9a65ca282e578dfea819cfa9c0a62b2499d8677392e09feaf305e9e6f5", size = 101834, upload-time = "2025-10-06T14:52:30.657Z" }
 wheels = [
@@ -703,6 +709,7 @@ version = "2.2.6"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/76/21/7d2a95e4bba9dc13d043ee156a356c0a8f0c6309dff6b21b4d71a073b8a8/numpy-2.2.6.tar.gz", hash = "sha256:e29554e2bef54a90aa5cc07da6ce955accb83f21ab5de01a62c8478897b264fd", size = 20276440, upload-time = "2025-05-17T22:38:04.611Z" }
 wheels = [
@@ -727,6 +734,8 @@ source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
     "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/24/62/ae72ff66c0f1fd959925b4c11f8c2dea61f47f6acaea75a08512cdfe3fed/numpy-2.4.1.tar.gz", hash = "sha256:a1ceafc5042451a858231588a104093474c6a5c57dcc724841f5c888d237d690", size = 20721320, upload-time = "2026-01-10T06:44:59.619Z" }
 wheels = [
@@ -743,8 +752,37 @@ wheels = [
 
 [[package]]
 name = "onnxruntime"
+version = "1.19.2"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+    "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "coloredlogs", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "flatbuffers", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+    { name = "sympy", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and platform_version < '13.0' and sys_platform == 'darwin'" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/39/18/272d3d7406909141d3c9943796e3e97cafa53f4342d9231c0cfd8cb05702/onnxruntime-1.19.2-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:84fa57369c06cadd3c2a538ae2a26d76d583e7c34bdecd5769d71ca5c0fc750e", size = 16776408, upload-time = "2024-09-04T06:37:02.431Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/ff/77bee5df55f034ee81d2e1bc58b2b8511b9c54f06ce6566cb562c5d95aa5/onnxruntime-1.19.2-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:d863e8acdc7232d705d49e41087e10b274c42f09e259016a46f32c34e06dc4fd", size = 16779187, upload-time = "2024-09-04T06:37:18.245Z" },
+    { url = "https://files.pythonhosted.org/packages/f2/a5/2a02687a88fc8a2507bef65876c90e96b9f8de5ba1f810acbf67c140fc67/onnxruntime-1.19.2-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:68e7051bef9cfefcbb858d2d2646536829894d72a4130c24019219442b1dd2ed", size = 16790434, upload-time = "2024-09-04T06:37:32.77Z" },
+]
+
+[[package]]
+name = "onnxruntime"
 version = "1.23.1"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "python_full_version >= '3.11' and python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+    "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'",
+]
 dependencies = [
     { name = "coloredlogs", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
     { name = "flatbuffers", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
@@ -766,14 +804,14 @@ name = "openai"
 version = "2.15.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "distro", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "httpx", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "jiter", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pydantic", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "sniffio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "distro", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "httpx", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "jiter", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pydantic", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "sniffio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/94/f4/4690ecb5d70023ce6bfcfeabfe717020f654bde59a775058ec6ac4692463/openai-2.15.0.tar.gz", hash = "sha256:42eb8cbb407d84770633f31bf727d4ffb4138711c670565a41663d9439174fba", size = 627383, upload-time = "2026-01-09T22:10:08.603Z" }
 wheels = [
@@ -785,8 +823,8 @@ name = "opentelemetry-api"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "importlib-metadata", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "importlib-metadata", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/97/b9/3161be15bb8e3ad01be8be5a968a9237c3027c5be504362ff800fca3e442/opentelemetry_api-1.39.1.tar.gz", hash = "sha256:fbde8c80e1b937a2c61f20347e91c0c18a1940cecf012d62e65a7caf08967c9c", size = 65767, upload-time = "2025-12-11T13:32:39.182Z" }
 wheels = [
@@ -798,8 +836,8 @@ name = "opentelemetry-exporter-otlp"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-exporter-otlp-proto-http", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-exporter-otlp-proto-http", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/30/9c/3ab1db90f32da200dba332658f2bbe602369e3d19f6aba394031a42635be/opentelemetry_exporter_otlp-1.39.1.tar.gz", hash = "sha256:7cf7470e9fd0060c8a38a23e4f695ac686c06a48ad97f8d4867bc9b420180b9c", size = 6147, upload-time = "2025-12-11T13:32:40.309Z" }
 wheels = [
@@ -811,7 +849,7 @@ name = "opentelemetry-exporter-otlp-proto-common"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e9/9d/22d241b66f7bbde88a3bfa6847a351d2c46b84de23e71222c6aae25c7050/opentelemetry_exporter_otlp_proto_common-1.39.1.tar.gz", hash = "sha256:763370d4737a59741c89a67b50f9e39271639ee4afc999dadfe768541c027464", size = 20409, upload-time = "2025-12-11T13:32:40.885Z" }
 wheels = [
@@ -823,13 +861,13 @@ name = "opentelemetry-exporter-otlp-proto-grpc"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "googleapis-common-protos", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "grpcio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-exporter-otlp-proto-common", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "googleapis-common-protos", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "grpcio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-exporter-otlp-proto-common", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/53/48/b329fed2c610c2c32c9366d9dc597202c9d1e58e631c137ba15248d8850f/opentelemetry_exporter_otlp_proto_grpc-1.39.1.tar.gz", hash = "sha256:772eb1c9287485d625e4dbe9c879898e5253fea111d9181140f51291b5fec3ad", size = 24650, upload-time = "2025-12-11T13:32:41.429Z" }
 wheels = [
@@ -841,13 +879,13 @@ name = "opentelemetry-exporter-otlp-proto-http"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "googleapis-common-protos", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-exporter-otlp-proto-common", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "googleapis-common-protos", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-exporter-otlp-proto-common", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-proto", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-sdk", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/80/04/2a08fa9c0214ae38880df01e8bfae12b067ec0793446578575e5080d6545/opentelemetry_exporter_otlp_proto_http-1.39.1.tar.gz", hash = "sha256:31bdab9745c709ce90a49a0624c2bd445d31a28ba34275951a6a362d16a0b9cb", size = 17288, upload-time = "2025-12-11T13:32:42.029Z" }
 wheels = [
@@ -859,7 +897,7 @@ name = "opentelemetry-proto"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "protobuf", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/49/1d/f25d76d8260c156c40c97c9ed4511ec0f9ce353f8108ca6e7561f82a06b2/opentelemetry_proto-1.39.1.tar.gz", hash = "sha256:6c8e05144fc0d3ed4d22c2289c6b126e03bcd0e6a7da0f16cedd2e1c2772e2c8", size = 46152, upload-time = "2025-12-11T13:32:48.681Z" }
 wheels = [
@@ -871,9 +909,9 @@ name = "opentelemetry-sdk"
 version = "1.39.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "opentelemetry-semantic-conventions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-semantic-conventions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/eb/fb/c76080c9ba07e1e8235d24cdcc4d125ef7aa3edf23eb4e497c2e50889adc/opentelemetry_sdk-1.39.1.tar.gz", hash = "sha256:cf4d4563caf7bff906c9f7967e2be22d0d6b349b908be0d90fb21c8e9c995cc6", size = 171460, upload-time = "2025-12-11T13:32:49.369Z" }
 wheels = [
@@ -885,8 +923,8 @@ name = "opentelemetry-semantic-conventions"
 version = "0.60b1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "opentelemetry-api", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/91/df/553f93ed38bf22f4b999d9be9c185adb558982214f33eae539d3b5cd0858/opentelemetry_semantic_conventions-0.60b1.tar.gz", hash = "sha256:87c228b5a0669b748c76d76df6c364c369c28f1c465e50f661e39737e84bc953", size = 137935, upload-time = "2025-12-11T13:32:50.487Z" }
 wheels = [
@@ -973,10 +1011,10 @@ name = "pydantic"
 version = "2.12.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "annotated-types", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pydantic-core", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-inspection", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "annotated-types", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pydantic-core", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-inspection", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/69/44/36f1a6e523abc58ae5f928898e4aca2e0ea509b5aa6f6f392a5d882be928/pydantic-2.12.5.tar.gz", hash = "sha256:4d351024c75c0f085a9febbb665ce8c0c6ec5d30e903bdb6394b7ede26aebb49", size = 821591, upload-time = "2025-11-26T15:11:46.471Z" }
 wheels = [
@@ -988,7 +1026,7 @@ name = "pydantic-core"
 version = "2.41.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/71/70/23b021c950c2addd24ec408e9ab05d59b035b39d97cdc1130e1bce647bb6/pydantic_core-2.41.5.tar.gz", hash = "sha256:08daa51ea16ad373ffd5e7606252cc32f07bc72b28284b6bc9c6df804816476e", size = 460952, upload-time = "2025-11-04T13:43:49.098Z" }
 wheels = [
@@ -1025,12 +1063,12 @@ name = "pytest"
 version = "9.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "exceptiongroup", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "iniconfig", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pluggy", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pygments", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "tomli", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "exceptiongroup", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "iniconfig", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pluggy", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pygments", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "tomli", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d1/db/7ef3487e0fb0049ddb5ce41d3a49c235bf9ad299b6a25d5780a89f19230f/pytest-9.0.2.tar.gz", hash = "sha256:75186651a92bd89611d1d9fc20f0b4345fd827c41ccd5c299a868a05d70edf11", size = 1568901, upload-time = "2025-12-06T21:30:51.014Z" }
 wheels = [
@@ -1042,9 +1080,9 @@ name = "pytest-asyncio"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "backports-asyncio-runner", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pytest", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "backports-asyncio-runner", marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pytest", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/90/2c/8af215c0f776415f3590cac4f9086ccefd6fd463befeae41cd4d3f193e5a/pytest_asyncio-1.3.0.tar.gz", hash = "sha256:d7f52f36d231b80ee124cd216ffb19369aa168fc10095013c6b014a34d3ee9e5", size = 50087, upload-time = "2025-11-10T16:07:47.256Z" }
 wheels = [
@@ -1095,10 +1133,10 @@ name = "requests"
 version = "2.32.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "charset-normalizer", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "urllib3", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "certifi", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "charset-normalizer", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "urllib3", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3f5c837e9c3dfcfe2018ea6ecef224c710c85ef728f4/requests-2.32.5.tar.gz", hash = "sha256:dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf", size = 134517, upload-time = "2025-08-18T20:46:02.573Z" }
 wheels = [
@@ -1110,8 +1148,8 @@ name = "rich"
 version = "14.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown-it-py", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pygments", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "markdown-it-py", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pygments", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fb/d2/8920e102050a0de7bfabeb4c4614a49248cf8d5d7a8d01885fbb24dc767a/rich-14.2.0.tar.gz", hash = "sha256:73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4", size = 219990, upload-time = "2025-10-09T14:16:53.064Z" }
 wheels = [
@@ -1159,7 +1197,7 @@ name = "sounddevice"
 version = "0.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "cffi", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a8/fd/a1c8500a0113d122f2343f827895de2083307bbcbb706da59078bcdc3b75/sounddevice-0.5.4.tar.gz", hash = "sha256:4286fc031606dccaaf5d0e5b0accdbe266a5bc66271b7ec5a985a7f4a9d09332", size = 143045, upload-time = "2026-01-21T21:09:27.671Z" }
 wheels = [
@@ -1172,7 +1210,7 @@ name = "sympy"
 version = "1.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mpmath", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "mpmath", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/83/d3/803453b36afefb7c2bb238361cd4ae6125a569b4db67cd9e79846ba2d68c/sympy-1.14.0.tar.gz", hash = "sha256:d3d3fe8df1e5a0b42f0e7bdf50541697dbe7d23746e894990c030e2b05e72517", size = 7793921, upload-time = "2025-04-27T18:05:01.611Z" }
 wheels = [
@@ -1184,7 +1222,7 @@ name = "tokenizers"
 version = "0.22.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "huggingface-hub", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "huggingface-hub", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/73/6f/f80cfef4a312e1fb34baf7d85c72d4411afde10978d4657f8cdd811d3ccc/tokenizers-0.22.2.tar.gz", hash = "sha256:473b83b915e547aa366d1eee11806deaf419e17be16310ac0a14077f1e28f917", size = 372115, upload-time = "2026-01-05T10:45:15.988Z" }
 wheels = [
@@ -1217,17 +1255,17 @@ name = "transformers"
 version = "4.57.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "huggingface-hub", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "pyyaml", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "regex", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "safetensors", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "tokenizers", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "filelock", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "huggingface-hub", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "numpy", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' and platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "packaging", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "pyyaml", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "regex", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "requests", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "safetensors", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "tokenizers", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "tqdm", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d6/68/a39307bcc4116a30b2106f2e689130a48de8bd8a1e635b5e1030e46fcd9e/transformers-4.57.1.tar.gz", hash = "sha256:f06c837959196c75039809636cd964b959f6604b75b8eeec6fdfc0440b89cc55", size = 10142511, upload-time = "2025-10-14T15:39:26.18Z" }
 wheels = [
@@ -1239,10 +1277,10 @@ name = "typer"
 version = "0.21.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "rich", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "shellingham", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "click", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "rich", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "shellingham", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/36/bf/8825b5929afd84d0dabd606c67cd57b8388cb3ec385f7ef19c5cc2202069/typer-0.21.1.tar.gz", hash = "sha256:ea835607cd752343b6b2b7ce676893e5a0324082268b48f27aa058bdb7d2145d", size = 110371, upload-time = "2026-01-06T11:21:10.989Z" }
 wheels = [
@@ -1272,7 +1310,7 @@ name = "typing-inspection"
 version = "0.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz", hash = "sha256:ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464", size = 75949, upload-time = "2025-10-01T02:14:41.687Z" }
 wheels = [
@@ -1293,7 +1331,7 @@ name = "watchfiles"
 version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "anyio", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c2/c9/8869df9b2a2d6c59d79220a4db37679e74f807c559ffe5265e08b227a210/watchfiles-1.1.1.tar.gz", hash = "sha256:a173cb5c16c4f40ab19cecf48a534c409f7ea983ab8fed0741304a1c0a31b3f2", size = 94440, upload-time = "2025-10-14T15:06:21.08Z" }
 wheels = [
@@ -1311,9 +1349,9 @@ name = "yarl"
 version = "1.22.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "multidict", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
-    { name = "propcache", marker = "platform_machine == 'x86_64' and platform_version >= '13.0' and sys_platform == 'darwin'" },
+    { name = "idna", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "multidict", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
+    { name = "propcache", marker = "platform_machine == 'x86_64' and platform_version >= '11.0' and sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/57/63/0c6ebca57330cd313f6102b16dd57ffaf3ec4c83403dcb45dbd15c6f3ea1/yarl-1.22.0.tar.gz", hash = "sha256:bebf8557577d4401ba8bd9ff33906f1376c877aa78d1fe216ad01b4d6745af71", size = 187169, upload-time = "2025-10-06T14:12:55.963Z" }
 wheels = [
