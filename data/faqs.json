@@ -1,0 +1,10 @@
+[
+    {
+      "id": "hours",
+      "question": "What are your hours",
+      "answer": "We are open Monday through Friday from 9 AM to 5 PM Eastern time.",
+      "tags": ["hours", "schedule"],
+      "priority": 1
+    }
+  ]
+  

@@ -1,0 +1,17 @@
+{
+    "business_name": "Your Business Name",
+    "timezone": "America/New_York",
+    "services": [
+      { "name": "Demo Call", "duration_minutes": 30 },
+      { "name": "Support Call", "duration_minutes": 30 }
+    ],
+    "hours": "Mon to Fri 9am to 5pm",
+    "policies": {
+      "cancellation": "Please cancel at least 24 hours in advance when possible."
+    },
+    "fallback": {
+      "capture_message": "I can take a message and have Phil call you back.",
+      "callback_window": "within one business day"
+    }
+  }
+  
