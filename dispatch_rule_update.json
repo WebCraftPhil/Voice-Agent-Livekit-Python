@@ -1,8 +1,8 @@
 {
   "name": "Inbound-Missed-Call",
   "rule": {
-    "dispatchRuleDirect": {
-      "roomName": "call-{caller_number}"
+    "dispatchRuleIndividual": {
+      "roomPrefix": "call-"
     }
   },
   "roomConfig": {
