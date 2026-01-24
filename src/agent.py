@@ -48,6 +48,8 @@ async def agent_session(ctx: JobContext) -> None:
         "room": ctx.room.name,
     }
 
+    await ctx.connect()
+
     session = AgentSession(
         stt=inference.STT(model="assemblyai/universal-streaming", language="en"),
         llm=inference.LLM(model="openai/gpt-4.1-mini"),
@@ -71,7 +73,9 @@ async def agent_session(ctx: JobContext) -> None:
         ),
     )
 
-    await ctx.connect()
+    await session.generate_reply(
+        instructions="Greet the caller and offer your assistance."
+    )
 
 
 if __name__ == "__main__":
