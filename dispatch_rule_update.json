@@ -1,5 +1,8 @@
 {
   "name": "Inbound-Missed-Call",
+  "trunkIds": [
+    "PN_PPN_D2FVXyocpzJR"
+  ],
   "rule": {
     "dispatchRuleIndividual": {
       "roomPrefix": "call-"
