@@ -48,16 +48,16 @@ A telephone-first customer service voice agent that answers frequently asked que
 
 #### Appointment Flow
 1. **Service Identification**: "What would you like to schedule?"
-2. **Time Preference Collection**: "What day and time works best for you?" (collect preferred date/time range)
-3. **Availability Query**: Check schedule for customer's preferred timeframe
-4. **Options Presentation**: Offer 2-3 available time slots that match or approximate their preference
+2. **Availability Query**: Check schedule for upcoming availability
+3. **Options Presentation**: Offer 2-3 available time slots
+4. **Time Selection**: Customer chooses a slot or shares a preferred date/time range if none work
 5. **Selection Confirmation**: Confirm the chosen date, time, and service details
 6. **Booking Execution**: Attempt scheduling through approved tool
 7. **Success Confirmation**: Provide confirmation number and details
 
 #### Required Information
 - Service type (from predefined list)
-- Preferred date/time range
+- Selected appointment time slot (or preferred date/time range if no slots fit)
 - Customer name (first and last)
 - Contact phone number
 - Confirmation acceptance
