@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from dotenv import load_dotenv
 from livekit import rtc
@@ -18,16 +19,21 @@ logger = logging.getLogger("agent")
 
 load_dotenv(".env.local")
 
+PROMPT_PATH = (
+    Path(__file__).resolve().parent / "prompts" / "stellar_styles_system_prompt.txt"
+)
+STELLAR_SYSTEM_PROMPT = PROMPT_PATH.read_text(encoding="utf-8").strip()
+DEFAULT_OPENING = (
+    "Hey there, welcome to Stellar Styles and More. "
+    "I can help you find something meaningful or answer any questions you have. "
+    "What are you looking for today?"
+)
+
 
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(
-            instructions=(
-                "You are a helpful voice AI assistant. "
-                "The user is interacting with you via voice. "
-                "Responses must be concise, phone friendly, "
-                "and avoid complex formatting or symbols."
-            ),
+            instructions=STELLAR_SYSTEM_PROMPT,
         )
 
 
@@ -72,7 +78,7 @@ async def agent_session(ctx: JobContext) -> None:
     )
 
     await session.generate_reply(
-        instructions="Greet the caller and offer your assistance."
+        instructions=DEFAULT_OPENING
     )
 
 

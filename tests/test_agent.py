@@ -8,11 +8,19 @@ from livekit.agents import AgentSession, inference, llm
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from src.agent import Assistant  # noqa: E402
+from src.agent import Assistant, STELLAR_SYSTEM_PROMPT  # noqa: E402
 
 
 def _llm() -> llm.LLM:
     return inference.LLM(model="openai/gpt-4.1-mini")
+
+
+def test_stellar_prompt_loaded() -> None:
+    assistant = Assistant()
+
+    assert "Stellar Styles and More" in STELLAR_SYSTEM_PROMPT
+    assert hasattr(assistant, "instructions")
+    assert "Stellar Styles and More" in assistant.instructions
 
 
 @pytest.mark.asyncio
