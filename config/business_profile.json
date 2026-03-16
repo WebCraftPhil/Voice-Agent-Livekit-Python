@@ -1,17 +1,58 @@
 {
-    "business_name": "Your Business Name",
-    "timezone": "America/New_York",
-    "services": [
-      { "name": "Demo Call", "duration_minutes": 30 },
-      { "name": "Support Call", "duration_minutes": 30 }
-    ],
-    "hours": "Mon to Fri 9am to 5pm",
-    "policies": {
-      "cancellation": "Please cancel at least 24 hours in advance when possible."
+  "business_name": "Downtown Demo Barbershop",
+  "address": "456 Demo Street",
+  "city": "Nashua",
+  "state": "NH",
+  "timezone": "America/New_York",
+  "hours_summary": "Monday to Friday 10 AM to 6 PM, Saturday 9 AM to 5 PM, closed Sunday.",
+  "hours": {
+    "monday": "10:00-18:00",
+    "tuesday": "10:00-18:00",
+    "wednesday": "10:00-18:00",
+    "thursday": "10:00-18:00",
+    "friday": "10:00-18:00",
+    "saturday": "09:00-17:00",
+    "sunday": "closed"
+  },
+  "services": [
+    {
+      "id": "haircut",
+      "name": "Haircut",
+      "duration_minutes": 30,
+      "price": 30
     },
-    "fallback": {
-      "capture_message": "I can take a message and have Phil call you back.",
-      "callback_window": "within one business day"
+    {
+      "id": "beard_trim",
+      "name": "Beard Trim",
+      "duration_minutes": 20,
+      "price": 15
+    },
+    {
+      "id": "kids_haircut",
+      "name": "Kids Haircut",
+      "duration_minutes": 25,
+      "price": 25
+    },
+    {
+      "id": "lineup",
+      "name": "Line Up",
+      "duration_minutes": 10,
+      "price": 12
     }
-  }
+  ],
+  "policies": {
+    "cancellation": "Please cancel or reschedule at least 24 hours in advance.",
+    "walkins": "Walk-ins are welcome based on availability.",
+    "late": "If you are more than 10 minutes late, we may need to move your appointment to the next available slot."
+  },
+  "fallback": {
+    "capture_message": "I can take your name and callback number and have someone from Downtown Demo Barbershop call you back.",
+    "callback_window": "within one business day"
+  },
+  "appointment_intake_required_fields": [
+    "preferred_appointment_time",
+    "caller_name",
+    "callback_phone_number"
+  ]
+}
   

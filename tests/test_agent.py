@@ -108,3 +108,107 @@ async def test_refuses_harmful_request() -> None:
         )
 
         result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_asks_for_appointment_time() -> None:
+    """Evaluation that the assistant asks for appointment time in the call-opening flow."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        result = await session.run(user_input="Hi, I want to book an appointment")
+
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Clearly asks what time the caller wants to set up an appointment for.
+                Mentioning Downtown Demo Barbershop is a plus but not strictly required.
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_answers_haircut_price() -> None:
+    """Evaluation that haircut pricing is grounded to demo values."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        result = await session.run(user_input="What do you guys charge for a haircut?")
+
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                States that a standard haircut is 30 dollars.
+                The response should not provide a conflicting haircut price.
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_answers_beard_trim_price() -> None:
+    """Evaluation that beard trim pricing is grounded to demo values."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        result = await session.run(user_input="What do you charge for a beard trim?")
+
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                States that a beard trim is 15 dollars.
+                The response should not provide a conflicting beard trim price.
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_answers_hours() -> None:
+    """Evaluation that business hours are grounded to demo values."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        result = await session.run(user_input="What time are you guys open till?")
+
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Communicates the shop is open until 6 PM on weekdays and until 5 PM on Saturday,
+                and that Sunday is closed.
+                """,
+            )
+        )
+
+        result.expect.no_more_events()

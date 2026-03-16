@@ -1,10 +1,143 @@
 [
-    {
-      "id": "hours",
-      "question": "What are your hours",
-      "answer": "We are open Monday through Friday from 9 AM to 5 PM Eastern time.",
-      "tags": ["hours", "schedule"],
-      "priority": 1
-    }
-  ]
+  {
+    "id": "hours",
+    "question": "What time are you open till?",
+    "answer": "We are open until 6 PM Monday through Friday, and until 5 PM on Saturday. We are closed on Sunday.",
+    "tags": ["hours", "schedule"],
+    "priority": 1
+  },
+  {
+    "id": "location",
+    "question": "Where are you located?",
+    "answer": "We are at 456 Demo Street in Nashua, New Hampshire.",
+    "tags": ["location", "address", "directions"],
+    "priority": 1
+  },
+  {
+    "id": "haircut_price",
+    "question": "What do you guys charge for a haircut?",
+    "answer": "A standard haircut is $30.",
+    "tags": ["price", "pricing", "haircut"],
+    "priority": 1
+  },
+  {
+    "id": "beard_trim_price",
+    "question": "What do you charge for a beard trim?",
+    "answer": "A beard trim is $15.",
+    "tags": ["price", "pricing", "beard"],
+    "priority": 1
+  },
+  {
+    "id": "walkins",
+    "question": "Do you take walk-ins?",
+    "answer": "Yes, we welcome walk-ins based on availability.",
+    "tags": ["walk-in", "appointments"],
+    "priority": 1
+  },
+  {
+    "id": "appointment_needed",
+    "question": "Do I need an appointment?",
+    "answer": "Appointments are recommended, but walk-ins are welcome when we have space.",
+    "tags": ["appointments", "booking"],
+    "priority": 2
+  },
+  {
+    "id": "service_duration_haircut",
+    "question": "How long does a haircut take?",
+    "answer": "A haircut is usually about 30 minutes.",
+    "tags": ["duration", "haircut"],
+    "priority": 2
+  },
+  {
+    "id": "service_duration_beard",
+    "question": "How long does a beard trim take?",
+    "answer": "A beard trim usually takes about 20 minutes.",
+    "tags": ["duration", "beard"],
+    "priority": 2
+  },
+  {
+    "id": "kids_haircut",
+    "question": "Do you do kids haircuts?",
+    "answer": "Yes, kids haircuts are available for $25.",
+    "tags": ["kids", "services", "pricing"],
+    "priority": 2
+  },
+  {
+    "id": "lineup",
+    "question": "Do you offer line ups?",
+    "answer": "Yes, we offer line ups for $12.",
+    "tags": ["lineup", "services"],
+    "priority": 2
+  },
+  {
+    "id": "cancellation",
+    "question": "What is your cancellation policy?",
+    "answer": "Please cancel or reschedule at least 24 hours in advance.",
+    "tags": ["policy", "cancellation"],
+    "priority": 2
+  },
+  {
+    "id": "late_policy",
+    "question": "What if I am running late?",
+    "answer": "If you are over 10 minutes late, we may move your appointment to the next available slot.",
+    "tags": ["policy", "late"],
+    "priority": 2
+  },
+  {
+    "id": "payment_methods",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept cash and major cards.",
+    "tags": ["payment"],
+    "priority": 2
+  },
+  {
+    "id": "same_day",
+    "question": "Can I book same-day appointments?",
+    "answer": "Yes, same-day appointments are available when there are open slots.",
+    "tags": ["booking", "same-day"],
+    "priority": 2
+  },
+  {
+    "id": "busy_times",
+    "question": "When are you busiest?",
+    "answer": "Evenings and Saturdays are usually the busiest times.",
+    "tags": ["schedule", "busy"],
+    "priority": 3
+  },
+  {
+    "id": "quiet_times",
+    "question": "When is the best time with less wait?",
+    "answer": "Late morning on weekdays is usually the easiest time to get in quickly.",
+    "tags": ["schedule", "wait"],
+    "priority": 3
+  },
+  {
+    "id": "beard_with_haircut",
+    "question": "Can I book a haircut and beard trim together?",
+    "answer": "Yes, we can book both services in one visit.",
+    "tags": ["services", "booking"],
+    "priority": 3
+  },
+  {
+    "id": "phone_booking",
+    "question": "Can I book over the phone?",
+    "answer": "Yes, we can help you schedule right over this call.",
+    "tags": ["booking", "phone"],
+    "priority": 3
+  },
+  {
+    "id": "reschedule",
+    "question": "Can I reschedule my appointment?",
+    "answer": "Yes, we can reschedule based on the next available times.",
+    "tags": ["reschedule", "booking"],
+    "priority": 3
+  },
+  {
+    "id": "call_back",
+    "question": "Can someone call me back?",
+    "answer": "Yes, I can take your name and callback number and have someone from the shop call you back within one business day.",
+    "tags": ["callback", "support"],
+    "priority": 3
+  }
+]
   
