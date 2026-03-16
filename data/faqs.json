@@ -63,7 +63,7 @@
     "priority": 2
   },
   {
-    "id": "lineup",
+    "id": "line_up",
     "question": "Do you offer line ups?",
     "answer": "Yes, we offer line ups for $12.",
     "tags": ["lineup", "services"],

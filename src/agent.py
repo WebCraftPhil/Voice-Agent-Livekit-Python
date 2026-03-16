@@ -126,7 +126,8 @@ BUSINESS_PROFILE = _load_json_file(
 FAQS = _load_json_file("FAQ_SOURCE_PATH", "data/faqs.json", [])
 
 AGENT_RUNTIME_NAME = os.getenv("AGENT_NAME", "Jessica-voice-agent")
-TIMEZONE = os.getenv("TIMEZONE", str(BUSINESS_PROFILE.get("timezone", "America/New_York")))
+_profile_timezone = BUSINESS_PROFILE.get("timezone")
+TIMEZONE = str(os.getenv("TIMEZONE") or _profile_timezone or "America/New_York")
 ASSISTANT_NAME = os.getenv("ASSISTANT_NAME", "Jessica")
 
 
@@ -150,7 +151,7 @@ def build_agent_instructions() -> str:
         "Use one or two short sentences unless the caller asks for more detail. "
         "\n\n"
         "Call flow rules:\n"
-        "1) First turn: greet the caller, introduce yourself as Jessica, state the business name, and ask what time they want to set up an appointment for.\n"
+        f"1) First turn: greet the caller, introduce yourself as {ASSISTANT_NAME}, state the business name, and ask what time they want to set up an appointment for.\n"
         "2) If caller wants to book, collect these fields in this order: preferred appointment time, caller name, callback phone number.\n"
         "3) If the caller asks a new question at any point, answer it first, then politely continue booking only if they still want to book.\n"
         "4) After collecting all three fields, repeat details once and ask for confirmation once. If they decline or change details, update and continue without repeating the same confirmation prompt over and over.\n"
@@ -223,8 +224,9 @@ async def agent_session(ctx: JobContext) -> None:
 
     await session.generate_reply(
         instructions=(
-            "Greet the caller as Jessica at Downtown Demo Barbershop and immediately ask what time "
-            "they want to set up their appointment for."
+            f"Greet the caller as {ASSISTANT_NAME} at "
+            f"{BUSINESS_PROFILE.get('business_name', 'Downtown Demo Barbershop')} "
+            "and immediately ask what time they want to set up their appointment for."
         )
     )
 
