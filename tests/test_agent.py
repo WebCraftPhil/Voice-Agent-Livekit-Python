@@ -234,3 +234,131 @@ async def test_answers_hours() -> None:
         )
 
         result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_booking_keeps_latest_time_after_multiple_changes() -> None:
+    """Evaluation that repeated time changes keep the latest requested appointment."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        opening = await session.run(user_input="Hello")
+        opening.expect.next_event().is_message(role="assistant")
+        opening.expect.no_more_events()
+
+        first_request = await session.run(
+            user_input="I want to book an appointment for 1 PM tomorrow."
+        )
+        first_request.expect.next_event().is_message(role="assistant")
+        first_request.expect.no_more_events()
+
+        second_request = await session.run(
+            user_input="Actually change it to 2 PM. No sorry, make that 3 PM."
+        )
+        second_request.expect.next_event().is_message(role="assistant")
+        second_request.expect.no_more_events()
+
+        final_request = await session.run(
+            user_input=(
+                "Actually 4 PM is best. My name is Phil and my number is 603-555-0199."
+            )
+        )
+        final_request.expect.next_event().is_message(role="assistant")
+        final_request.expect.no_more_events()
+
+        clarify = await session.run(
+            user_input="Phil. That's the full name and spelling is P-H-I-L."
+        )
+
+        await (
+            clarify.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Uses 4 PM as the active requested appointment time and does not insist on older times.
+                The response may confirm details and can ask for a final yes/no confirmation.
+                """,
+            )
+        )
+        clarify.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_booking_answers_question_then_continues_flow() -> None:
+    """Evaluation that FAQ interruption during booking is answered before continuing."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        opening = await session.run(user_input="Hello")
+        opening.expect.next_event().is_message(role="assistant")
+        opening.expect.no_more_events()
+
+        book = await session.run(
+            user_input="Can I schedule a haircut for Saturday at 11 AM?"
+        )
+        book.expect.next_event().is_message(role="assistant")
+        book.expect.no_more_events()
+
+        interrupt = await session.run(
+            user_input="Before we continue, what are your Saturday hours?"
+        )
+
+        await (
+            interrupt.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Answers the Saturday-hours question and then continues or returns to appointment flow.
+                Must not ignore the question.
+                """,
+            )
+        )
+        interrupt.expect.no_more_events()
+
+
+@pytest.mark.asyncio
+async def test_booking_updates_details_after_caller_correction() -> None:
+    """Evaluation that corrected appointment details are updated without looping."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        opening = await session.run(user_input="Hello")
+        opening.expect.next_event().is_message(role="assistant")
+        opening.expect.no_more_events()
+
+        start_booking = await session.run(
+            user_input=(
+                "I need an appointment tomorrow at 10 AM. My name is Steve. "
+                "My number is 603-555-0101."
+            )
+        )
+        start_booking.expect.next_event().is_message(role="assistant")
+        start_booking.expect.no_more_events()
+
+        correction = await session.run(
+            user_input="Actually change the time to 11 AM and the number to 603-555-0102."
+        )
+
+        await (
+            correction.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                Acknowledges updated details (11 AM and/or the updated callback number)
+                and proceeds normally. A single confirmation question is acceptable.
+                """,
+            )
+        )
+        correction.expect.no_more_events()

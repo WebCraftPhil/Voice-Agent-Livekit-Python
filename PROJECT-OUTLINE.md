@@ -51,3 +51,22 @@ This document outlines the development plan for a voice AI assistant built with 
 *   **Production Deployment:**
     *   Use the provided `Dockerfile` to containerize the agent.
     *   Deploy to LiveKit Cloud or another container hosting service.
+
+## 6. Working LiveKit Config Snapshot (2026-03-17)
+
+*   **LiveKit project:** `first-voice-agent` (subdomain: `first-voice-agent-pr105f3f`)
+*   **Agent ID:** `CA_uzBzoBc3QsCG`
+*   **Agent name (dispatch target):** `Jessica-voice-agent`
+*   **Current deployed version:** `v20260317164604` (`Available`)
+*   **Agent runtime status:** `Running` in `us-east`
+*   **Phone number (ACTIVE):** `+16033469332` (`PN_PPN_D2FVXyocpzJR`)
+*   **Inbound SIP trunk:** `ST_AUaNowuPWqij` (`Voice-agent inbound`)
+    *   Numbers: `+16033469332`
+    *   Allowed addresses: `0.0.0.0/0`
+    *   Allowed numbers: empty
+*   **SIP dispatch rule:** `SDR_jRojEp6SyqhZ` (`Inbound-Missed-Call`)
+    *   Type: `Individual (Caller)`
+    *   Room pattern: `call-_<caller>_<random>`
+    *   Agent target: `Jessica-voice-agent`
+    *   SIP trunk binding: `PN_PPN_D2FVXyocpzJR`
+*   **Cleanup completed:** removed extra conflicting trunk `ST_H2ncNt9whi8X`
