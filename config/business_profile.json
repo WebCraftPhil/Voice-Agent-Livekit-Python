@@ -46,7 +46,7 @@
     "late": "If you are more than 10 minutes late, we may need to move your appointment to the next available slot."
   },
   "fallback": {
-    "capture_message": "I can take your name and callback number and have someone from Downtown Demo Barbershop call you back.",
+    "capture_message": "I can take your name and callback number and have someone from Downtown Demo Barber Shop call you back.",
     "callback_window": "within one business day"
   },
   "appointment_intake_required_fields": [

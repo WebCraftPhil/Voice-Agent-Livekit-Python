@@ -131,8 +131,10 @@ TIMEZONE = str(os.getenv("TIMEZONE") or _profile_timezone or "America/New_York")
 ASSISTANT_NAME = os.getenv("ASSISTANT_NAME", "Jessica")
 
 
-def build_agent_instructions() -> str:
-    business_name = str(BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop"))
+def build_reception_instructions() -> str:
+    business_name = str(
+        BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
+    )
     address = str(BUSINESS_PROFILE.get("address", "456 Demo Street"))
     city = str(BUSINESS_PROFILE.get("city", "Nashua"))
     state = str(BUSINESS_PROFILE.get("state", "NH"))
@@ -153,7 +155,7 @@ def build_agent_instructions() -> str:
         "but do not overuse fillers. "
         "\n\n"
         "Call flow rules:\n"
-        "1) First turn must be exactly: 'This is Downtown Demo Barber Shop. My name is Jessica. How can I help you?'\n"
+        f"1) First turn must be exactly: 'This is {business_name}. My name is {ASSISTANT_NAME}. How can I help you?'\n"
         "2) After the opening line, pause and wait for the caller's request. Let the caller direct the conversation.\n"
         "3) Do not push appointment booking unless the caller asks to book.\n"
         "4) If caller wants to book, collect these fields in this order: preferred appointment time, caller name, callback phone number.\n"
@@ -176,7 +178,7 @@ def build_agent_instructions() -> str:
     )
 
 
-ASSISTANT_INSTRUCTIONS = build_agent_instructions()
+ASSISTANT_INSTRUCTIONS = build_reception_instructions()
 
 
 class Assistant(Agent):
@@ -226,9 +228,12 @@ async def agent_session(ctx: JobContext) -> None:
         ),
     )
 
+    business_name = str(
+        BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
+    )
     await session.generate_reply(
         instructions=(
-            "Say exactly: 'This is Downtown Demo Barber Shop. My name is Jessica. How can I help you?' "
+            f"Say exactly: 'This is {business_name}. My name is {ASSISTANT_NAME}. How can I help you?' "
             "Then wait for the caller's request and let them lead the conversation."
         )
     )
