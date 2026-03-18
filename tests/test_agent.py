@@ -1,6 +1,6 @@
+import importlib
 import sys
 from pathlib import Path
-import importlib
 
 import pytest
 from livekit.agents import AgentSession, inference, llm
@@ -9,18 +9,20 @@ from livekit.agents import AgentSession, inference, llm
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from src.agent import Assistant  # noqa: E402
 import src.agent as agent_module  # noqa: E402
+from src.agent import Assistant  # noqa: E402
 
 
 def _llm() -> llm.LLM:
     return inference.LLM(model="openai/gpt-4.1-mini")
 
 
-def test_runtime_name_is_separate_from_spoken_assistant_name(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("AGENT_NAME", "Stellar Assistant")
-    monkeypatch.delenv("ASSISTANT_NAME", raising=False)
-    monkeypatch.delenv("AGENT_RUNTIME_NAME", raising=False)
+def test_runtime_name_is_separate_from_spoken_assistant_name(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("AGENT_NAME", "Jessica")
+    monkeypatch.setenv("ASSISTANT_NAME", "Stellar Assistant")
+    monkeypatch.setenv("AGENT_RUNTIME_NAME", "Jessica-voice-agent")
 
     reloaded = importlib.reload(agent_module)
 
