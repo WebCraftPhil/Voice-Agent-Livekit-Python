@@ -125,10 +125,27 @@ BUSINESS_PROFILE = _load_json_file(
 )
 FAQS = _load_json_file("FAQ_SOURCE_PATH", "data/faqs.json", [])
 
-AGENT_RUNTIME_NAME = os.getenv("AGENT_NAME", "Jessica-voice-agent")
+DEFAULT_AGENT_RUNTIME_NAME = "Jessica-voice-agent"
+
+
+def _agent_identity_from_env() -> tuple[str, str]:
+    runtime_name = os.getenv("AGENT_RUNTIME_NAME", DEFAULT_AGENT_RUNTIME_NAME).strip()
+    assistant_name = (
+        os.getenv("ASSISTANT_NAME") or os.getenv("AGENT_NAME") or "Jessica"
+    ).strip()
+
+    return runtime_name or DEFAULT_AGENT_RUNTIME_NAME, assistant_name or "Jessica"
+
+
+AGENT_RUNTIME_NAME, ASSISTANT_NAME = _agent_identity_from_env()
 _profile_timezone = BUSINESS_PROFILE.get("timezone")
 TIMEZONE = str(os.getenv("TIMEZONE") or _profile_timezone or "America/New_York")
-ASSISTANT_NAME = os.getenv("ASSISTANT_NAME", "Jessica")
+
+logger.info(
+    "Configured agent runtime '%s' with assistant name '%s'",
+    AGENT_RUNTIME_NAME,
+    ASSISTANT_NAME,
+)
 
 
 def build_reception_instructions() -> str:

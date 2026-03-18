@@ -73,6 +73,8 @@ Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environme
 - `LIVEKIT_URL`
 - `LIVEKIT_API_KEY`
 - `LIVEKIT_API_SECRET`
+- `AGENT_RUNTIME_NAME` for the LiveKit dispatch target name, which must match your SIP dispatch rule
+- `ASSISTANT_NAME` for the spoken name the caller hears
 
 Model access options:
 
@@ -171,6 +173,7 @@ You can also self-host LiveKit instead of using LiveKit Cloud. See the [self-hos
 ## Troubleshooting
 
 - Missing env vars: ensure `.env.local` includes `LIVEKIT_URL`, `LIVEKIT_API_KEY`, and `LIVEKIT_API_SECRET`, or load them via `lk app env -w -d .env.local`.
+- Telephony dispatch mismatch: `AGENT_RUNTIME_NAME` must match the agent name in your SIP dispatch rule. `ASSISTANT_NAME` only affects the spoken introduction.
 - Model download failures: re-run `uv run python src/agent.py download-files` and verify your network access to the model artifacts.
 
 ## License
