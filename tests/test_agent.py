@@ -1,4 +1,3 @@
-import importlib
 import sys
 from pathlib import Path
 
@@ -17,16 +16,14 @@ def _llm() -> llm.LLM:
     return inference.LLM(model="openai/gpt-4.1-mini")
 
 
-def test_runtime_name_is_separate_from_spoken_assistant_name(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.setenv("AGENT_NAME", "Jessica")
-    monkeypatch.setenv("ASSISTANT_NAME", "Stellar Assistant")
-    monkeypatch.setenv("AGENT_RUNTIME_NAME", "Jessica-voice-agent")
-
-    reloaded = importlib.reload(agent_module)
-
-    runtime_name, assistant_name = reloaded._agent_identity_from_env()
+def test_runtime_name_is_separate_from_spoken_assistant_name() -> None:
+    runtime_name, assistant_name = agent_module._agent_identity_from_env(
+        {
+            "AGENT_NAME": "Jessica",
+            "ASSISTANT_NAME": "Stellar Assistant",
+            "AGENT_RUNTIME_NAME": "Jessica-voice-agent",
+        }
+    )
 
     assert runtime_name == "Jessica-voice-agent"
     assert assistant_name == "Stellar Assistant"

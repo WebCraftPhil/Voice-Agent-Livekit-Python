@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -128,10 +129,11 @@ FAQS = _load_json_file("FAQ_SOURCE_PATH", "data/faqs.json", [])
 DEFAULT_AGENT_RUNTIME_NAME = "Jessica-voice-agent"
 
 
-def _agent_identity_from_env() -> tuple[str, str]:
-    runtime_name = os.getenv("AGENT_RUNTIME_NAME", DEFAULT_AGENT_RUNTIME_NAME).strip()
+def _agent_identity_from_env(env: Mapping[str, str] | None = None) -> tuple[str, str]:
+    source = env or os.environ
+    runtime_name = source.get("AGENT_RUNTIME_NAME", DEFAULT_AGENT_RUNTIME_NAME).strip()
     assistant_name = (
-        os.getenv("ASSISTANT_NAME") or os.getenv("AGENT_NAME") or "Jessica"
+        source.get("ASSISTANT_NAME") or source.get("AGENT_NAME") or "Jessica"
     ).strip()
 
     return runtime_name or DEFAULT_AGENT_RUNTIME_NAME, assistant_name or "Jessica"
