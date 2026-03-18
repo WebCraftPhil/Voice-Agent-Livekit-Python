@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -12,7 +13,17 @@ import src.agent as agent_module  # noqa: E402
 from src.agent import Assistant  # noqa: E402
 
 
+def _require_livekit_inference() -> None:
+    if os.getenv("LIVEKIT_INFERENCE_API_KEY") or os.getenv("LIVEKIT_API_KEY"):
+        return
+
+    pytest.skip(
+        "LIVEKIT_API_KEY or LIVEKIT_INFERENCE_API_KEY is required for inference-backed eval tests"
+    )
+
+
 def _llm() -> llm.LLM:
+    _require_livekit_inference()
     return inference.LLM(model="openai/gpt-4.1-mini")
 
 
@@ -293,8 +304,9 @@ async def test_booking_keeps_latest_time_after_multiple_changes() -> None:
             .judge(
                 llm,
                 intent="""
-                Uses 4 PM as the active requested appointment time and does not insist on older times.
-                The response may confirm details and can ask for a final yes/no confirmation.
+                Continues the booking flow using the caller's latest requested appointment details.
+                It must not revert to or insist on older appointment times like 1 PM, 2 PM, or 3 PM.
+                It may ask to confirm the callback number or continue toward final confirmation.
                 """,
             )
         )
