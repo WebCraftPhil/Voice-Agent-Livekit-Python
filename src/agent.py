@@ -18,7 +18,6 @@ from livekit.agents import (
     room_io,
 )
 from livekit.plugins import noise_cancellation, silero
-from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
 
@@ -152,7 +151,9 @@ def _float_env(var_name: str, default: float) -> float:
     try:
         return float(raw)
     except ValueError:
-        logger.warning("Invalid %s value '%s'. Using default %s.", var_name, raw, default)
+        logger.warning(
+            "Invalid %s value '%s'. Using default %s.", var_name, raw, default
+        )
         return default
 
 
@@ -163,7 +164,9 @@ def _int_env(var_name: str, default: int) -> int:
     try:
         return int(raw)
     except ValueError:
-        logger.warning("Invalid %s value '%s'. Using default %s.", var_name, raw, default)
+        logger.warning(
+            "Invalid %s value '%s'. Using default %s.", var_name, raw, default
+        )
         return default
 
 
@@ -233,25 +236,6 @@ def build_reception_instructions() -> str:
 ASSISTANT_INSTRUCTIONS = build_reception_instructions()
 
 
-def build_turn_handling() -> dict[str, Any]:
-    return {
-        "turn_detection": MultilingualModel(),
-        "endpointing": {
-            "mode": "dynamic",
-            "min_delay": 0.35,
-            "max_delay": 2.5,
-        },
-        "interruption": {
-            "mode": "adaptive",
-            "min_duration": 0.25,
-            "min_words": 0,
-            "discard_audio_if_uninterruptible": True,
-            "false_interruption_timeout": 1.5,
-            "resume_false_interruption": True,
-        },
-    }
-
-
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(
@@ -288,7 +272,6 @@ async def agent_session(ctx: JobContext) -> None:
             model="cartesia/sonic-3", voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"
         ),
         vad=ctx.proc.userdata["vad"],
-        turn_handling=build_turn_handling(),
         preemptive_generation=False,
     )
 
