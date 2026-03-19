@@ -307,11 +307,9 @@ async def agent_session(ctx: JobContext) -> None:
     business_name = str(
         BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
     )
-    await session.generate_reply(
-        instructions=(
-            f"Say exactly: 'This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?' "
-            "Then wait for the caller's request and let them lead the conversation."
-        )
+    # Use direct TTS for the opener so callers hear audio immediately after connect.
+    await session.say(
+        f"This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?"
     )
 
 
