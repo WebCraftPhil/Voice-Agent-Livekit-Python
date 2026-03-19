@@ -262,6 +262,37 @@ async def test_answers_hours() -> None:
 
 
 @pytest.mark.asyncio
+async def test_answers_hours_without_booking_pressure() -> None:
+    """Evaluation that the assistant answers directly without pushing appointments."""
+    async with (
+        _llm() as llm,
+        AgentSession(llm=llm) as session,
+    ):
+        await session.start(Assistant())
+
+        # Consume the fixed opening greeting first.
+        opening = await session.run(user_input="Hello")
+        opening.expect.next_event().is_message(role="assistant")
+        opening.expect.no_more_events()
+
+        result = await session.run(user_input="What time are you guys open till?")
+
+        await (
+            result.expect.next_event()
+            .is_message(role="assistant")
+            .judge(
+                llm,
+                intent="""
+                States the business hours clearly and does not try to push the caller into booking an appointment.
+                The response should stay helpful and not add salesy scheduling pressure.
+                """,
+            )
+        )
+
+        result.expect.no_more_events()
+
+
+@pytest.mark.asyncio
 async def test_booking_keeps_latest_time_after_multiple_changes() -> None:
     """Evaluation that repeated time changes keep the latest requested appointment."""
     async with (
@@ -315,7 +346,7 @@ async def test_booking_keeps_latest_time_after_multiple_changes() -> None:
 
 @pytest.mark.asyncio
 async def test_booking_answers_question_then_continues_flow() -> None:
-    """Evaluation that FAQ interruption during booking is answered before continuing."""
+    """Evaluation that an interruption during booking is answered before any old script continues."""
     async with (
         _llm() as llm,
         AgentSession(llm=llm) as session,
@@ -342,8 +373,8 @@ async def test_booking_answers_question_then_continues_flow() -> None:
             .judge(
                 llm,
                 intent="""
-                Answers the Saturday-hours question and then continues or returns to appointment flow.
-                Must not ignore the question.
+                Answers the Saturday-hours question first and does not keep pushing the earlier appointment flow.
+                It should sound like it stopped to address the interruption, not like it kept talking over the caller.
                 """,
             )
         )

@@ -18,6 +18,7 @@ from livekit.agents import (
     room_io,
 )
 from livekit.plugins import noise_cancellation, silero
+from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
 
@@ -175,14 +176,14 @@ def build_reception_instructions() -> str:
         "\n\n"
         "Call flow rules:\n"
         f"1) First turn must be exactly: 'This is {business_name}. My name is {ASSISTANT_NAME}. How can I help you?'\n"
-        "2) After the opening line, pause and wait for the caller's request. Let the caller direct the conversation.\n"
-        "3) Do not push appointment booking unless the caller asks to book.\n"
-        "4) If caller wants to book, collect these fields in this order: preferred appointment time, caller name, callback phone number.\n"
-        "5) If the caller asks a new question at any point, answer it first, then politely continue booking only if they still want to book.\n"
-        "6) Whenever the caller changes the appointment time or another booking detail, treat the newest detail as authoritative and explicitly use it in your very next booking-related reply.\n"
+        "2) Be helpful first: answer the caller's question directly before suggesting any next step.\n"
+        "3) Do not pressure, upsell, or repeatedly circle back to appointments. Only mention booking when the caller asks to book or when it genuinely helps answer their question.\n"
+        "4) If the caller interrupts, changes the subject, or asks a new question, stop the current response immediately in your next turn, answer the new request, and drop any unfinished booking script.\n"
+        "5) If caller wants to book, collect these fields in this order: preferred appointment time, caller name, callback phone number. Ask for only one missing field at a time.\n"
+        "6) If the caller gives a new appointment time or corrects another booking detail, treat the newest detail as authoritative and use it in your very next booking-related reply.\n"
         "7) Do not ask for a booking field again if the caller already gave it clearly. Instead, briefly confirm the latest time, name, and callback number you have on file and only ask for the one field that is still missing or unclear.\n"
-        "8) As soon as the last missing or unclear booking field is clarified, your next reply must summarize the full booking using the latest requested appointment time before asking for confirmation.\n"
-        "9) After collecting all three booking fields, repeat the latest details once and ask for confirmation once. If they decline or change details, update and continue without repeating the same confirmation prompt over and over.\n"
+        "8) As soon as the last missing or unclear booking field is clarified, your next reply must summarize the full booking using the latest requested appointment time before asking for confirmation once.\n"
+        "9) If the caller is not ready to book, stay on their current question and do not keep nudging them back to scheduling.\n"
         "10) When answering business-hours questions, include the full grounded summary: weekdays until 6 PM, Saturday until 5 PM, and closed Sunday, unless the caller asks for only one specific day.\n"
         "11) If asked FAQ-style questions, answer from the knowledge base below and do not invent prices or hours.\n"
         "12) If you are unsure, use the fallback process and offer to take a callback message.\n"
@@ -202,6 +203,25 @@ def build_reception_instructions() -> str:
 
 
 ASSISTANT_INSTRUCTIONS = build_reception_instructions()
+
+
+def build_turn_handling() -> dict[str, Any]:
+    return {
+        "turn_detection": MultilingualModel(),
+        "endpointing": {
+            "mode": "dynamic",
+            "min_delay": 0.35,
+            "max_delay": 2.5,
+        },
+        "interruption": {
+            "mode": "adaptive",
+            "min_duration": 0.25,
+            "min_words": 0,
+            "discard_audio_if_uninterruptible": True,
+            "false_interruption_timeout": 1.5,
+            "resume_false_interruption": True,
+        },
+    }
 
 
 class Assistant(Agent):
@@ -236,6 +256,7 @@ async def agent_session(ctx: JobContext) -> None:
             model="cartesia/sonic-3", voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"
         ),
         vad=ctx.proc.userdata["vad"],
+        turn_handling=build_turn_handling(),
         preemptive_generation=False,
     )
 
