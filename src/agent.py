@@ -144,6 +144,33 @@ AGENT_RUNTIME_NAME, ASSISTANT_NAME = _agent_identity_from_env()
 _profile_timezone = BUSINESS_PROFILE.get("timezone")
 TIMEZONE = str(os.getenv("TIMEZONE") or _profile_timezone or "America/New_York")
 
+
+def _float_env(var_name: str, default: float) -> float:
+    raw = os.getenv(var_name)
+    if not raw:
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        logger.warning("Invalid %s value '%s'. Using default %s.", var_name, raw, default)
+        return default
+
+
+def _int_env(var_name: str, default: int) -> int:
+    raw = os.getenv(var_name)
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        logger.warning("Invalid %s value '%s'. Using default %s.", var_name, raw, default)
+        return default
+
+
+AGENT_LOAD_THRESHOLD = _float_env("AGENT_LOAD_THRESHOLD", 0.85)
+AGENT_IDLE_PROCESSES = _int_env("AGENT_IDLE_PROCESSES", 1)
+AGENT_INIT_TIMEOUT_SECONDS = _float_env("AGENT_INIT_TIMEOUT_SECONDS", 30.0)
+
 logger.info(
     "Configured agent runtime '%s' with assistant name '%s'",
     AGENT_RUNTIME_NAME,
@@ -232,7 +259,11 @@ class Assistant(Agent):
         )
 
 
-server = AgentServer()
+server = AgentServer(
+    load_threshold=AGENT_LOAD_THRESHOLD,
+    num_idle_processes=AGENT_IDLE_PROCESSES,
+    initialize_process_timeout=AGENT_INIT_TIMEOUT_SECONDS,
+)
 
 
 def prewarm(proc: JobProcess) -> None:
