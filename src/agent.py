@@ -18,6 +18,7 @@ from livekit.agents import (
     room_io,
 )
 from livekit.plugins import noise_cancellation, silero
+from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
 
@@ -218,8 +219,9 @@ def build_reception_instructions() -> str:
         "10) When answering business-hours questions, include the full grounded summary: weekdays until 6 PM, Saturday until 5 PM, and closed Sunday, unless the caller asks for only one specific day.\n"
         "11) If asked FAQ-style questions, answer from the knowledge base below and do not invent prices or hours.\n"
         "12) If you are unsure, use the fallback process and offer to take a callback message.\n"
-        "13) If caller name is unclear after one attempt, ask them to say it slowly or spell it, then read it back for confirmation.\n"
-        "14) For callback phone number capture, ask for digits slowly one group at a time. Repeat the full number back in 3-3-4 chunks and ask for a quick yes/no confirmation. If unclear, ask once more, then offer to continue with a callback message.\n"
+        "13) If caller name is unclear after one attempt, do not guess from transcription. Ask them to spell it, then read it back exactly and confirm it.\n"
+        "14) For callback phone number capture, ask for digits slowly one group at a time. Repeat the full number back in 3-3-4 chunks and ask for a quick yes/no confirmation. If unclear, ask once more, then offer to continue with a callback message. If the caller can use keypad tones, accept those digits.\n"
+        "15) If the caller says a name or number that sounds like a common word, assume it may be misheard and ask for confirmation rather than filling the field with a guess.\n"
         "\n"
         f"Business: {business_name}\n"
         f"Location: {address}, {city}, {state}\n"
@@ -266,13 +268,22 @@ async def agent_session(ctx: JobContext) -> None:
     await ctx.connect()
 
     session = AgentSession(
+        turn_detection=MultilingualModel(),
         stt=inference.STT(model="assemblyai/universal-streaming", language="en"),
         llm=inference.LLM(model="openai/gpt-4.1-mini"),
         tts=inference.TTS(
             model="cartesia/sonic-3", voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"
         ),
         vad=ctx.proc.userdata["vad"],
-        preemptive_generation=False,
+        allow_interruptions=True,
+        discard_audio_if_uninterruptible=True,
+        min_interruption_duration=0.25,
+        min_interruption_words=0,
+        min_endpointing_delay=0.35,
+        max_endpointing_delay=2.5,
+        false_interruption_timeout=1.5,
+        resume_false_interruption=True,
+        preemptive_generation=True,
     )
 
     await session.start(
@@ -290,9 +301,8 @@ async def agent_session(ctx: JobContext) -> None:
     business_name = str(
         BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
     )
-    # Use direct TTS for the opener so callers hear audio immediately after connect.
     await session.say(
-        f"This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?"
+        f"Thanks for calling {business_name}. {ASSISTANT_NAME} here. How can I help?"
     )
 
 
