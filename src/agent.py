@@ -302,7 +302,7 @@ async def agent_session(ctx: JobContext) -> None:
         BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
     )
     await session.say(
-        f"Thanks for calling {business_name}. {ASSISTANT_NAME} here. How can I help?"
+        f"This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?"
     )
 
 
