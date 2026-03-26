@@ -178,6 +178,7 @@ You can also self-host LiveKit instead of using LiveKit Cloud. See the [self-hos
 - Missing env vars: ensure `.env.local` includes `LIVEKIT_URL`, `LIVEKIT_API_KEY`, and `LIVEKIT_API_SECRET`, or load them via `lk app env -w -d .env.local`.
 - Telephony dispatch mismatch: `AGENT_RUNTIME_NAME` must match the agent name in your SIP dispatch rule. `ASSISTANT_NAME` only affects the spoken introduction.
 - Model download failures: re-run `uv run python src/agent.py download-files` and verify your network access to the model artifacts.
+- CI wrapper failures can be transient if a sync or another run is happening at the same time. If that happens, retry after the workspace settles.
 - Turn detector startup error (`model_q8.onnx` missing): run `uv run python src/agent.py download-files` before starting the worker.
 - Port in use (`[Errno 48] ... 8081`): another worker is already running; stop existing workers before starting a new one.
 - Worker toggles unavailable under load: lower `AGENT_IDLE_PROCESSES` or raise `AGENT_LOAD_THRESHOLD` in `.env.local`.
