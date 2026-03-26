@@ -155,6 +155,7 @@ dist/
 ._*
 .Spotlight-V100
 .Trashes
+*.icloud
 
 # Windows
 Thumbs.db
@@ -231,6 +232,7 @@ docs/.doctrees/
 
 # Project-specific
 KMS
+.conda/
 
 # Backup files
 *.bak

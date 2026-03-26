@@ -272,7 +272,9 @@ async def agent_session(ctx: JobContext) -> None:
         stt=inference.STT(model="assemblyai/universal-streaming", language="en"),
         llm=inference.LLM(model="openai/gpt-4.1-mini"),
         tts=inference.TTS(
-            model="cartesia/sonic-3", voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc"
+            model="cartesia/sonic-3",
+            voice="9626c31c-bec5-4cca-baa8-f8ba9e84c8bc",
+            extra_kwargs={"speed": "fast"},
         ),
         vad=ctx.proc.userdata["vad"],
         allow_interruptions=True,
