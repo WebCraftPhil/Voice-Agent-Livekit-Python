@@ -207,7 +207,7 @@ def build_reception_instructions() -> str:
         "but do not overuse fillers. "
         "\n\n"
         "Call flow rules:\n"
-        f"1) First turn must be exactly: 'This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?'\n"
+        "1) First turn must be exactly: 'Downtown Demo Barbershop, this is Jess— I can help you get booked or check what we have open. What are you looking to come in for today?'\n"
         "2) Be helpful first: answer the caller's question directly before suggesting any next step.\n"
         "3) Do not pressure, upsell, or repeatedly circle back to appointments. Only mention booking when the caller asks to book or when it genuinely helps answer their question.\n"
         "4) If the caller interrupts, changes the subject, or asks a new question, stop the current response immediately in your next turn, answer the new request, and drop any unfinished booking script.\n"
@@ -300,11 +300,10 @@ async def agent_session(ctx: JobContext) -> None:
         ),
     )
 
-    business_name = str(
-        BUSINESS_PROFILE.get("business_name", "Downtown Demo Barber Shop")
-    )
     await session.say(
-        f"This is {business_name}, {ASSISTANT_NAME} speaking. How can I help?"
+        "Downtown Demo Barbershop, this is Jess— "
+        "I can help you get booked or check what we have open. "
+        "What are you looking to come in for today?"
     )
 
 
