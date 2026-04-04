@@ -157,11 +157,11 @@ async def test_uses_caller_led_opening_line() -> None:
             .judge(
                 llm,
                 intent="""
-                Uses a natural phone greeting like:
-                - "This is Downtown Demo Barber Shop, Jessica speaking."
-                - Asks "How can I help?"
+                Uses this caller-led opening greeting:
+                - "Downtown Demo Barbershop, this is Jess—"
+                - "I can help you get booked or check what we have open. What are you looking to come in for today?"
 
-                The message should sound conversational, not scripted or robotic.
+                The message should stay natural and conversational.
                 """,
             )
         )
